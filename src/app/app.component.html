@@ -1,0 +1,8 @@
+<app-form
+  [name]="itemToEdit?.name || ''"
+  [price]="itemToEdit?.price || 0"
+  (formValues)="addItem($event)"
+></app-form>
+<app-list [list]="items" (edit)="editItem($event)">
+  <button class="btn btn-danger">&#xF78A;</button>
+</app-list>
