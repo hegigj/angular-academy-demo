@@ -1,8 +1,16 @@
+<p></p>
 <app-form
+  class="form-style"
   [name]="itemToEdit?.name || ''"
   [price]="itemToEdit?.price || 0"
   (formValues)="addItem($event)"
 ></app-form>
-<app-list [list]="items" (edit)="editItem($event)">
-  <button class="btn btn-danger">&#xF78A;</button>
+<p></p>
+
+<app-list
+  class="List-product-style"
+  [list]="items"
+  (edit)="editItem($event)"
+  (delete)="deleteItem($event)"
+>
 </app-list>

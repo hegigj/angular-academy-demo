@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {FormValue} from "./form/form.component";
+import { FormValue } from './form/form.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'demo';
@@ -13,7 +13,8 @@ export class AppComponent {
 
   items: FormValue[] = [];
 
-  itemToEdit?: FormValue;
+  itemToEdit!: FormValue;
+  itemDelete!: FormValue;
 
   constructor() {
     // setInterval(function (scope) { scope.count++ }, 1000, this);
@@ -22,7 +23,7 @@ export class AppComponent {
   addItem(values: FormValue): void {
     if (this.itemToEdit) {
       this.items.splice(
-        this.items.findIndex(item => item === this.itemToEdit),
+        this.items.findIndex((item) => item === this.itemToEdit),
         1,
         values
       );
@@ -38,6 +39,10 @@ export class AppComponent {
   }
 
   deleteItem(item: FormValue): void {
-    this.items.splice(this.items.findIndex(i => i === item), 1);
+    this.itemDelete = item;
+    this.items.splice(
+      this.items.findIndex((i) => i === item),
+      1
+    );
   }
 }

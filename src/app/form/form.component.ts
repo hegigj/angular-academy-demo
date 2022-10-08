@@ -3,10 +3,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter, Input,
+  EventEmitter,
+  Input,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 
 export interface FormValue {
@@ -17,7 +18,7 @@ export interface FormValue {
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('x') inputName!: ElementRef<HTMLInputElement>;
@@ -30,7 +31,7 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Output()
   formValues: EventEmitter<FormValue> = new EventEmitter<FormValue>();
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     console.log('INIT');
@@ -62,7 +63,7 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
     if (this.name && this.price >= 0) {
       this.formValues.emit({
         name: this.name,
-        price: this.price
+        price: this.price,
       });
       this.name = '';
       this.price = 0;
