@@ -12,6 +12,8 @@ import {
 export interface FormValue {
   name: string;
   price: number;
+  active: boolean;
+  creationDate: Date;
 }
 
 @Component({
@@ -26,6 +28,9 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
   name!: string;
 
   private _price!: number;
+
+  @Input('isActive')
+  active!: boolean;
 
   @Output()
   formValues: EventEmitter<FormValue> = new EventEmitter<FormValue>();
@@ -62,10 +67,13 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
     if (this.name && this.price >= 0) {
       this.formValues.emit({
         name: this.name,
-        price: this.price
+        price: this.price,
+        active: this.active,
+        creationDate: new Date()
       });
       this.name = '';
       this.price = 0;
+      this.active = false;
     }
   }
 }
