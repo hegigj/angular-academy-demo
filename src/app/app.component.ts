@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {FormValue} from "./form/form.component";
+import {Observable, of} from "rxjs";
+import {delay} from "rxjs/operators"
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,16 @@ export class AppComponent {
 
   count: number = 0;
 
-  items: FormValue[] = [];
+  items: FormValue[] = [
+    {
+      name: 'Item 1',
+      price: 3,
+      active: false,
+      creationDate: new Date()
+    }
+  ];
+
+  asyncData: Observable<string> = of('Hello').pipe(delay(1000));
 
   itemToEdit?: FormValue;
 

@@ -1,8 +1,15 @@
 <app-form
   [name]="itemToEdit?.name || ''"
   [price]="itemToEdit?.price || 0"
+  [isActive]="itemToEdit?.active || false"
   (formValues)="addItem($event)"
 ></app-form>
 <app-list [list]="items" (edit)="editItem($event)">
   <button class="btn btn-danger">&#xF78A;</button>
 </app-list>
+<div *ngIf="asyncData | async as data; else loadingRef">
+  {{data | lowercase}}
+</div>
+<ng-template #loadingRef>
+  Loading...
+</ng-template>

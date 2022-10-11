@@ -14,6 +14,12 @@
         <input type="number" [(ngModel)]="price" class="form-control" id="price">
       </div>
     </div>
+    <div class="mb-3 row">
+      <label for="active" class="col-sm-2 col-form-label">Is Active</label>
+      <div class="col-sm-10">
+        <input type="checkbox" [(ngModel)]="active" id="active">
+      </div>
+    </div>
     <div class="md-3 row">
       <button type="button" class="btn btn-success" (click)="add()">Add</button>
     </div>

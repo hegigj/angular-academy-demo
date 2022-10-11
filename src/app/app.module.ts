@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -10,6 +10,8 @@ import {ChannelService} from "./channel.service";
 import {SharedModule} from "./shared/shared.module";
 import { FormComponent } from './form/form.component';
 import {FormsModule} from "@angular/forms";
+import {DatePipe} from "@angular/common";
+import {format, FormatDatePipe} from './format-date.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import {FormsModule} from "@angular/forms";
     ListComponent,
     HighlightDirective,
     DividedByPipe,
-    FormComponent
+    FormComponent,
+    FormatDatePipe
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,18 @@ import {FormsModule} from "@angular/forms";
     FormsModule,
     SharedModule
   ],
-  providers: [ChannelService],
+  providers: [
+    ChannelService,
+    DatePipe,
+    {
+      provide: format,
+      useValue: 'EEE dd/MM/yyyy hh:mm a'
+    }
+    // {
+    //   provide: LOCALE_ID,
+    //   useValue: 'fr-FR'
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
