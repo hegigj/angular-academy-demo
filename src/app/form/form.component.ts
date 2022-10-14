@@ -3,22 +3,23 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
-  Input,
+  EventEmitter, Input,
   OnInit,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 
 export interface FormValue {
   name: string;
   price: number;
+  active: boolean;
+  creationDate: Date;
 }
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
+  styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('x') inputName!: ElementRef<HTMLInputElement>;
@@ -28,10 +29,13 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   private _price!: number;
 
+  @Input('isActive')
+  active!: boolean;
+
   @Output()
   formValues: EventEmitter<FormValue> = new EventEmitter<FormValue>();
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     console.log('INIT');
@@ -64,9 +68,12 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.formValues.emit({
         name: this.name,
         price: this.price,
+        active: this.active,
+        creationDate: new Date()
       });
       this.name = '';
       this.price = 0;
+      this.active = false;
     }
   }
 }

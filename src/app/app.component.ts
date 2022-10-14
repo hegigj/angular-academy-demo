@@ -1,20 +1,30 @@
 import { Component } from '@angular/core';
-import { FormValue } from './form/form.component';
+import {FormValue} from "./form/form.component";
+import {Observable, of} from "rxjs";
+import {delay} from "rxjs/operators"
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'demo';
 
   count: number = 0;
 
-  items: FormValue[] = [];
+  items: FormValue[] = [
+    {
+      name: 'Item 1',
+      price: 3,
+      active: false,
+      creationDate: new Date()
+    }
+  ];
 
-  itemToEdit!: FormValue;
-  itemDelete!: FormValue;
+  asyncData: Observable<string> = of('Hello').pipe(delay(1000));
+
+  itemToEdit?: FormValue;
 
   constructor() {
     // setInterval(function (scope) { scope.count++ }, 1000, this);
@@ -23,7 +33,7 @@ export class AppComponent {
   addItem(values: FormValue): void {
     if (this.itemToEdit) {
       this.items.splice(
-        this.items.findIndex((item) => item === this.itemToEdit),
+        this.items.findIndex(item => item === this.itemToEdit),
         1,
         values
       );
@@ -39,10 +49,6 @@ export class AppComponent {
   }
 
   deleteItem(item: FormValue): void {
-    this.itemDelete = item;
-    this.items.splice(
-      this.items.findIndex((i) => i === item),
-      1
-    );
+    this.items.splice(this.items.findIndex(i => i === item), 1);
   }
 }

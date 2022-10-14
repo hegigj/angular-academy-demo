@@ -1,12 +1,13 @@
-<p></p>
 <app-form
   class="form-style"
   [name]="itemToEdit?.name || ''"
   [price]="itemToEdit?.price || 0"
+  [isActive]="itemToEdit?.active || false"
   (formValues)="addItem($event)"
 ></app-form>
-<p></p>
-
+<!-- <app-list [list]="items" (edit)="editItem($event)" (edit)="deleteItem($event)">
+  <button class="btn btn-danger">&#xF78A;</button>
+</app-list> -->
 <app-list
   class="List-product-style"
   [list]="items"
@@ -14,3 +15,8 @@
   (delete)="deleteItem($event)"
 >
 </app-list>
+
+<div *ngIf="asyncData | async as data; else loadingRef">
+  {{ data | lowercase }}
+</div>
+<ng-template #loadingRef> Loading... </ng-template>

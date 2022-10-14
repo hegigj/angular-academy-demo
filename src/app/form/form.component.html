@@ -11,34 +11,29 @@
     <div class="mb-3 row">
       <label for="price" class="col-sm-2 col-form-label">Price</label>
       <div class="col-sm-10">
-        <input
-          type="number"
-          [(ngModel)]="price"
-          class="form-control"
-          id="price"
-        />
+        <input type="number" [(ngModel)]="price" class="form-control" id="price" />
       </div>
     </div>
+    <div class="mb-3 row">
+      <label for="active" class="col-sm-2 col-form-label">Is Active</label>
+      <div class="col-sm-10">
+        <input type="checkbox" [(ngModel)]="active" id="active" />
+      </div>
+    </div>
+    <!-- <div class="md-3 row">
+      <button type="button" class="btn btn-success" (click)="add()">Add</button>
+    </div> -->
     <div class="row">
       <div class="col-md-4"></div>
       <div class="col-md-4 row success">
         <p></p>
         <button type="button" class="btn btn-success" (click)="add()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-plus-circle"
-            viewBox="0 0 16 16"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle"
+            viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
             <path
-              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-            />
-            <path
-              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-            /></svg
-          >Add
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+          </svg>Add
         </button>
       </div>
       <div class="col-md-4"></div>
