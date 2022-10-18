@@ -3,11 +3,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter, Input,
   OnInit,
-  Output,
   ViewChild
 } from '@angular/core';
+import {ItemService} from "../item.service";
 
 export interface FormValue {
   name: string;
@@ -24,22 +23,31 @@ export interface FormValue {
 export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('x') inputName!: ElementRef<HTMLInputElement>;
 
-  @Input()
   name!: string;
 
   private _price!: number;
 
-  @Input('isActive')
   active!: boolean;
 
-  @Output()
-  formValues: EventEmitter<FormValue> = new EventEmitter<FormValue>();
+  private editMode: boolean = false;
 
-  constructor() { }
+  constructor(private itemService: ItemService) {
+
+  }
 
   ngOnInit(): void {
     console.log('INIT');
-    console.log(this.inputName.nativeElement);
+    this.itemService.itemToBeEdited$.checkForChanges((formValue) => {
+      console.log(formValue);
+      this.editMode = true;
+
+      const { name, price, active } = formValue;
+
+      this.name = name as string;
+      this.price = price as number;
+      this.active = active as boolean;
+    });
+    // console.log(this.inputName.nativeElement);
   }
 
   ngAfterViewInit(): void {
@@ -55,7 +63,6 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
     return this._price;
   }
 
-  @Input()
   set price(value: number) {
     console.log(value);
     if (value >= 0) {
@@ -65,12 +72,20 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   add(): void {
     if (this.name && this.price >= 0) {
-      this.formValues.emit({
+      const form: FormValue = {
         name: this.name,
         price: this.price,
         active: this.active,
         creationDate: new Date()
-      });
+      };
+
+      if (this.editMode) {
+        this.editMode = false;
+        this.itemService.edit(form);
+      } else {
+        this.itemService.add(form);
+      }
+
       this.name = '';
       this.price = 0;
       this.active = false;

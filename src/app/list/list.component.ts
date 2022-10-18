@@ -9,6 +9,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import {FormValue} from "../form/form.component";
+import {ItemService} from "../item.service";
 
 @Component({
   selector: 'app-list',
@@ -34,27 +35,24 @@ import {FormValue} from "../form/form.component";
       >
 <!--        {{item | json}}-->
         #{{i}} {{(i % 2 === 0 ? (item?.name | titlecase) : (item?.name | uppercase)) | slice: 0:3}} - {{item?.price | number: '1.0-2' | currency: 'USD':'code'}} . Created at: {{ item?.creationDate | formatDate}}
-        <button class="btn btn-primary" (click)="edit(item)">&#xF78A;</button>
+        <button class="btn btn-primary" (click)="edit(item)">Edit</button>
+        <button class="btn btn-danger" (click)="deleteItem(item)">Delete</button>
         <ng-content></ng-content>
       </li>
     </ng-template>
   `
 })
 export class ListComponent implements OnChanges, AfterContentInit, AfterContentChecked {
-  @Input('list')
-  itemList!: FormValue[];
-
-  @Output('edit')
-  onEdit: EventEmitter<FormValue> = new EventEmitter<FormValue>();
+  itemList: FormValue[];
 
   edit(item: FormValue): void {
-    this.onEdit.emit(item);
+    console.log(item);
+    this.itemService.onEdit(item);
   }
 
-  // @Output('delete')
-  // onDelete: EventEmitter<FormValue> = new EventEmitter<FormValue>();
-
-  constructor() { }
+  constructor(private itemService: ItemService) {
+    this.itemList = this.itemService.list;
+  }
 
   ngAfterContentInit(): void {
     console.log('CONTENT INIT');
@@ -68,7 +66,7 @@ export class ListComponent implements OnChanges, AfterContentInit, AfterContentC
     console.log('Changes', changes);
   }
 
-  // deleteItem(item: FormValue): void {
-  //   this.onDelete.emit(item);
-  // }
+  deleteItem(item: FormValue): void {
+    this.itemService.delete(item);
+  }
 }
