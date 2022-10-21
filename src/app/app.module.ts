@@ -9,7 +9,7 @@ import { DividedByPipe } from './divided-by.pipe';
 import {ChannelService} from "./channel.service";
 import {SharedModule} from "./shared/shared.module";
 import { FormComponent } from './form/form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import {format, FormatDatePipe} from './format-date.pipe';
 
@@ -26,7 +26,8 @@ import {format, FormatDatePipe} from './format-date.pipe';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [
     ChannelService,
