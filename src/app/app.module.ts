@@ -1,4 +1,4 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -40,10 +40,6 @@ import {HttpClientModule} from "@angular/common/http";
       provide: format,
       useValue: 'EEE dd/MM/yyyy hh:mm a'
     }
-    // {
-    //   provide: LOCALE_ID,
-    //   useValue: 'fr-FR'
-    // }
   ],
   bootstrap: [AppComponent]
 })

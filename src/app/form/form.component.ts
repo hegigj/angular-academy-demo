@@ -1,31 +1,13 @@
-import {
-  AfterViewChecked,
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter, Input,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ItemsService} from "../items.service";
 import {filter, switchMap, tap} from "rxjs";
-
-export interface FormValue {
-  name: string;
-  price: number;
-  active: boolean;
-  creationDate: Date;
-}
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  @ViewChild('x') inputName!: ElementRef<HTMLInputElement>;
-
+export class FormComponent implements OnInit {
   id?: number;
   name!: string;
   private _price!: number;
@@ -34,8 +16,6 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
   constructor(private itemsService: ItemsService) { }
 
   ngOnInit(): void {
-    console.log('INIT');
-
     this.itemsService.itemIdEdit$
       .pipe(
         filter(id => id !== null),
@@ -49,15 +29,6 @@ export class FormComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.price = price;
         this.active = active;
       });
-  }
-
-  ngAfterViewInit(): void {
-    console.log('After View Init');
-    console.log(this.inputName.nativeElement);
-  }
-
-  ngAfterViewChecked(): void {
-    console.log('After View Checked');
   }
 
   get price(): number {
