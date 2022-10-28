@@ -1,11 +1,13 @@
-<input
-  type="search"
-  placeholder="Search"
-  [formControl]="searchControl"
->
+<!--<input-->
+<!--  type="search"-->
+<!--  placeholder="Search"-->
+<!--  [formControl]="searchControl"-->
+<!--&gt;-->
 
-<ol type="i" *ngIf="filteredMovies | async as movies; else loadingRef">
-  <li *ngFor="let movie of movies">{{movie}}</li>
-</ol>
+<!--<ol type="i" *ngIf="filteredMovies | async as movies; else loadingRef">-->
+<!--  <li *ngFor="let movie of movies">{{movie}}</li>-->
+<!--</ol>-->
 
-<ng-template #loadingRef>Loading...</ng-template>
+<!--<ng-template #loadingRef>Loading...</ng-template>-->
+<app-form></app-form>
+<app-list></app-list>

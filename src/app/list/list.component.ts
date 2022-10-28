@@ -2,13 +2,14 @@ import {
   AfterContentChecked,
   AfterContentInit,
   Component,
-  EventEmitter,
+  EventEmitter, Inject,
   Input,
-  OnChanges,
+  OnChanges, OnInit,
   Output,
   SimpleChanges
 } from '@angular/core';
 import {FormValue} from "../form/form.component";
+import {ItemModel, ItemsService} from "../items.service";
 
 @Component({
   selector: 'app-list',
@@ -33,28 +34,40 @@ import {FormValue} from "../form/form.component";
         [ngStyle]="{'font-weight': item.active ? 700 : 500}"
       >
 <!--        {{item | json}}-->
-        #{{i}} {{(i % 2 === 0 ? (item?.name | titlecase) : (item?.name | uppercase)) | slice: 0:3}} - {{item?.price | number: '1.0-2' | currency: 'USD':'code'}} . Created at: {{ item?.creationDate | formatDate}}
-        <button class="btn btn-primary" (click)="edit(item)">&#xF78A;</button>
+        #{{i}} {{(i % 2 === 0 ? (item?.name | titlecase) : (item?.name | uppercase))}} - {{item?.price | number: '1.0-2' | currency: 'USD':'code'}} . Created at: {{ item?.creationDate | formatDate}}
+        <button class="btn btn-primary" (click)="edit(item)">Edit</button>
+        <button class="btn btn-danger" (click)="delete(item)">Delete</button>
         <ng-content></ng-content>
       </li>
     </ng-template>
   `
 })
-export class ListComponent implements OnChanges, AfterContentInit, AfterContentChecked {
-  @Input('list')
-  itemList!: FormValue[];
+export class ListComponent implements OnInit, OnChanges, AfterContentInit, AfterContentChecked {
+  itemList: ItemModel[] = [];
 
-  @Output('edit')
-  onEdit: EventEmitter<FormValue> = new EventEmitter<FormValue>();
+  edit(item: ItemModel): void {
+    this.itemsService.onEdit(item.id);
+  }
 
-  edit(item: FormValue): void {
-    this.onEdit.emit(item);
+  delete(item: ItemModel): void {
+    if (confirm('Are you sure to delete this item?')) {
+      this.itemsService.delete(item.id).subscribe(this.getList.bind(this));
+    }
   }
 
   // @Output('delete')
   // onDelete: EventEmitter<FormValue> = new EventEmitter<FormValue>();
 
-  constructor() { }
+  constructor(private itemsService: ItemsService) { }
+
+  ngOnInit(): void {
+    this.getList();
+  }
+
+  private getList(): void {
+    this.itemsService.getList()
+      .subscribe(response => this.itemList = response);
+  }
 
   ngAfterContentInit(): void {
     console.log('CONTENT INIT');
