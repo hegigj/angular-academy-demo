@@ -12,6 +12,8 @@ import { FormComponent } from './form/form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import {format, FormatDatePipe} from './format-date.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {format, FormatDatePipe} from './format-date.pipe';
     AppRoutingModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     ChannelService,
