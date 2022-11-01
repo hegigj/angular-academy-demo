@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ItemsService} from "../items.service";
 import {filter, switchMap, tap} from "rxjs";
+import {NgForm, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, AfterViewInit {
+  @ViewChild('formRef') form?: NgForm;
+
   id?: number;
-  name!: string;
-  private _price!: number;
-  active!: boolean;
 
   constructor(private itemsService: ItemsService) { }
 
@@ -25,30 +25,40 @@ export class FormComponent implements OnInit {
       .subscribe(response => {
         const {name, price, active} = response; // Object destructuring
 
-        this.name = name;
-        this.price = price;
-        this.active = active;
+        this.form?.form?.patchValue({
+          name,
+          price,
+          active: !!active
+        });
+
+        this.form?.form.get('active')?.enable();
+        this.form?.form
+          .get('price')
+          ?.setValidators([Validators.required, Validators.min(0)]);
+
+        // setTimeout(() => this.form?.form.get('name')?.setValue('X'), 1000);
       });
   }
 
-  get price(): number {
-    return this._price;
+  ngAfterViewInit(): void {
+    console.log(this.form?.form);
+    console.log(this.form?.form.getRawValue());
+    this.form?.form.valueChanges.subscribe(value => {
+      console.log(value);
+      console.log(this.form?.form.getRawValue());
+    });
   }
 
-  set price(value: number) {
-    console.log(value);
-    if (value >= 0) {
-      this._price = value;
-    }
-  }
-
-  add(): void {
-    if (this.name && this.price >= 0) {
+  add(e: any): void {
+    console.log(e);
+    if (this.form?.valid) {
       if (this.id) {
+        const { name, price, active} = this.form?.form?.getRawValue();
+        console.log(name, price, active);
         this.itemsService.edit(this.id, {
-          name: this.name,
-          price: this.price,
-          active: this.active
+          name,
+          price,
+          active
         }).subscribe();
         this.id = undefined;
       }

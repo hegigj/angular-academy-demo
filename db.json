@@ -6,5 +6,13 @@
       "username": "hegigj"
     }
   ],
-  "items": []
+  "items": [
+    {
+      "name": "Item 12",
+      "price": 10,
+      "active": "",
+      "modifiedDate": "2022-10-28T18:53:18.057Z",
+      "id": 1
+    }
+  ]
 }
