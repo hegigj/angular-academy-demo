@@ -1,0 +1,24 @@
+<div [formGroup]="user">
+  <div formGroupName="info">
+    <input type="text" formControlName="firstName" placeholder="First Name">
+    <input type="text" formControlName="lastName" placeholder="Last Name">
+    <input type="number" formControlName="age">
+  </div>
+
+  <input type="email" formControlName="email">
+  <input type="password" formControlName="password">
+  <input type="password" formControlName="confirmPassword">
+
+<!--  <ul formArrayName="tag">-->
+<!--    <li>-->
+<!--      <input [formControl]="tag"> <button [disabled]="tag.invalid" (click)="addTag()">Add</button>-->
+<!--    </li>-->
+<!--    <ng-container *ngFor="let tag of getTags()?.controls;index as i">-->
+<!--      <li>-->
+<!--        <input [formControlName]="i">-->
+<!--      </li>-->
+<!--    </ng-container>-->
+<!--  </ul>-->
+
+  <button [disabled]="user.invalid">Register</button>
+</div>

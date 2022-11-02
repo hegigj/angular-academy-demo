@@ -3,7 +3,14 @@
     {
       "id": 1,
       "mockToken": "1234@ikubINFO",
-      "username": "hegigj"
+      "username": "hegigj",
+      "password": "1234",
+      "firstName": "Hegi",
+      "lastName": "Gjoka",
+      "email": "hgjoka@gmail.com",
+      "birthDate": "1997-01-16T00:00:00",
+      "idCard": "J70116067N",
+      "age": 25
     }
   ],
   "items": [
