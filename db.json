@@ -1,25 +1,34 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "mockToken": "1234@ikubINFO",
-      "username": "hegigj",
-      "password": "1234",
-      "firstName": "Hegi",
-      "lastName": "Gjoka",
-      "email": "hgjoka@gmail.com",
-      "birthDate": "1997-01-16T00:00:00",
-      "idCard": "J70116067N",
-      "age": 25
-    }
-  ],
   "items": [
     {
-      "name": "Item 12",
-      "price": 10,
-      "active": "",
-      "modifiedDate": "2022-10-28T18:53:18.057Z",
-      "id": 1
+      "id": 1,
+      "title": "Routing",
+      "description": "Routing and Lazy loaded routing",
+      "creationDate": "2022-10-28T18:53:18.057Z"
+    },
+    {
+      "id": 2,
+      "title": "Forms",
+      "description": "Routing and Lazy loaded routing",
+      "creationDate": "2022-10-28T18:53:18.057Z"
+    },
+    {
+      "id": 3,
+      "title": "Http Client",
+      "description": "Routing and Lazy loaded routing",
+      "creationDate": "2022-10-28T18:53:18.057Z"
+    },
+    {
+      "id": 4,
+      "title": "Observable",
+      "description": "Routing and Lazy loaded routing",
+      "creationDate": "2022-10-28T18:53:18.057Z"
+    },
+    {
+      "id": 5,
+      "title": "Dependencies Injection",
+      "description": "Routing and Lazy loaded routing",
+      "creationDate": "2022-10-28T18:53:18.057Z"
     }
   ]
 }
