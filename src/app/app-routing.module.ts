@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {ListComponent} from "./list/list.component";
 import {DetailComponent} from "./list/detail/detail.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
+import {UserGuard} from "./user.guard";
+import {ItemsResolver} from "./items.resolver";
+import {ItemResolver} from "./item.resolver";
 
 const appRoutes: Routes = [
   {
@@ -12,16 +16,35 @@ const appRoutes: Routes = [
   {
     path: 'list',
     component: ListComponent,
+    canActivate: [UserGuard],
+    data: {
+      users: ['USER', 'ADMIN']
+    },
+    resolve: {
+      items: ItemsResolver
+    },
     children: [
       {
         path: ':ID',
-        component: DetailComponent
+        component: DetailComponent,
+        resolve: {
+          item: ItemResolver
+        }
       }
     ]
   },
-  // {
-  //   path: 'admin-panel'
-  // },
+  {
+    path: 'not-found',
+    component: NotFoundComponent
+  },
+  {
+    path: 'admin',
+    canLoad: [UserGuard],
+    data: {
+      users: ['ADMIN']
+    },
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
   {
     path: '**',
     redirectTo: '/list',

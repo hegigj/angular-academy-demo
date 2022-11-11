@@ -9,6 +9,7 @@ export class UserService {
   constructor() { }
 
   loginOrSwitch(user?: string): void {
+    console.log(user);
     this.user = user || undefined;
   }
 

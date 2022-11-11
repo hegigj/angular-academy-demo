@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   user: FormControl;
 
   constructor(private userService: UserService) {
-    this.user = new FormControl(undefined, Validators.required);
+    this.user = new FormControl('', Validators.required);
   }
 
   ngOnInit(): void {
