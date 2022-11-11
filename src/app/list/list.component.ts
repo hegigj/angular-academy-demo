@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ItemModel, ItemsService} from "../items.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-list',
@@ -26,6 +27,7 @@ import {ItemModel, ItemsService} from "../items.service";
         <ng-content></ng-content>
       </li>
     </ng-template>
+    <router-outlet></router-outlet>
   `
 })
 export class ListComponent implements OnInit {
@@ -33,6 +35,9 @@ export class ListComponent implements OnInit {
 
   edit(item: ItemModel): void {
     this.itemsService.onEdit(item.id);
+    this.router.navigate([1], {
+      relativeTo: this.activatedRoute
+    });
   }
 
   delete(item: ItemModel): void {
@@ -41,7 +46,13 @@ export class ListComponent implements OnInit {
     }
   }
 
-  constructor(private itemsService: ItemsService) { }
+  constructor(
+    private itemsService: ItemsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    console.log(this.activatedRoute);
+  }
 
   ngOnInit(): void {
     this.getList();

@@ -11,6 +11,8 @@ import {format, FormatDatePipe} from './format-date.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from "@angular/common/http";
 import { RegisterFormComponent } from './register-form/register-form.component';
+import {AppRoutingModule} from "./app-routing.module";
+import { DetailsComponent } from './list/details/details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     ListComponent,
     FormComponent,
     FormatDatePipe,
-    RegisterFormComponent
+    RegisterFormComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     SharedModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [
     DatePipe,
