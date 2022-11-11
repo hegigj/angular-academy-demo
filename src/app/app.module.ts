@@ -10,6 +10,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import { HeaderComponent } from './header/header.component';
 import { ListComponent } from './list/list.component';
 import { DetailComponent } from './list/detail/detail.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { DetailComponent } from './list/detail/detail.component';
     HeaderComponent,
     ListComponent,
     DetailComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

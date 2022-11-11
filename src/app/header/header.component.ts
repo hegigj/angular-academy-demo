@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
+import {UserService} from "../user.service";
+import {tap} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -6,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  user: FormControl;
 
-  constructor() { }
+  constructor(private userService: UserService) {
+    this.user = new FormControl(undefined, Validators.required);
+  }
 
   ngOnInit(): void {
+    this.user.valueChanges
+      .pipe(
+        tap(value => this.userService.loginOrSwitch(value))
+      )
+      .subscribe();
   }
 
 }
